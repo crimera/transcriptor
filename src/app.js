@@ -6,16 +6,32 @@ const size_mb = "51"
 let instance = null
 let audio = null
 let context = null
+let filename = null
+
+function parseModel(model) {
+    let c = model.indexOf("(")
+    return model
+        .toLowerCase()
+        .slice(0, c)
+        .trim()
+        .replace(" ", ".")
+}
 
 document.getElementById('getModelBtn').addEventListener('click', function() {
-    loadRemote(modelUrl, dst, size_mb, cbProgress, storeFS, () => { console.log("cancelled") }, cbPrint);
-})
+    let modelChooser = document.getElementById("model")
+    let model = modelChooser.value
 
+    console.log(`ggml-model-whisper-${parseModel(model)}-q5_1.bin`)
+
+    loadRemote(`ggml-model-whisper-${parseModel(model)}-q5_1.bin`, dst, size_mb, cbProgress, storeFS, () => { console.log("cancelled") }, cbPrint);
+})
 
 let processBtn = document.getElementById('processBtn')
 
 processBtn.addEventListener('click', function() {
-    onProcess(false)
+    let translate = document.getElementById("translate").checked
+
+    onProcess(this.translate)
 })
 
 let transcriptNode = document.getElementById('transcript')
@@ -189,12 +205,29 @@ function cbProgress(message) {
     console.log(message);
 }
 
+let exportBtn = document.getElementById("exportBtn")
+exportBtn.addEventListener('click', () => {
+    downloadString(script.join('\n\n'), "text/plain", fileToSrt(filename))
+})
+
+function fileToSrt(name) {
+    let i = name.lastIndexOf('.')
+    let fname = name.slice(0, i)
+    return `${fname}.srt`
+}
+
 var Module = {
     print: (message) => {
         console.log(message)
         addTranscript(message)
     },
-    printErr: (message) => { console.log(message) },
+    printErr: (message) => { 
+        if (message.includes("whisper_print_timings")) {
+            notify("Done...")
+            exportBtn.removeAttribute("disabled")
+        }
+        console.log(message) 
+    },
     setStatus: function(text) {
         console.log(text)
     },
@@ -255,7 +288,17 @@ function loadPreview(file) {
     document.getElementById("preview").replaceWith(node)
 }
 
+function resetExport() {
+    exportBtn.setAttribute("disabled", true)
+    script = []
+}
+
 function loadAudio(event) {
+    exportBtn.setAttribute("disabled", true)
+    notify("Loading file...")
+    transcriptNode.innerHTML = ''
+    resetExport()
+
     if (!context) {
         context = new AudioContext({
             sampleRate: kSampleRate,
@@ -272,6 +315,7 @@ function loadAudio(event) {
     }
 
     loadPreview(file);
+    filename = file.name
 
     printTextarea('js: loading audio: ' + file.name + ', size: ' + file.size + ' bytes');
     printTextarea('js: please wait ...');
@@ -294,6 +338,7 @@ function loadAudio(event) {
                 printTextarea('js: audio loaded, size: ' + audio.length);
 
                 toggleProcessBtn()
+                notify("Loaded audio")
 
                 // truncate to first 30 seconds
                 if (audio.length > kMaxAudio_s * kSampleRate) {
@@ -340,6 +385,8 @@ function onProcess(translate) {
         printTextarea('js: processing - this might take a while ...');
         printTextarea('');
 
+        notify("Generating transcript...")
+
         setTimeout(function() {
             var ret = Module.full_default(instance, audio, "en", nthreads, translate);
             console.log('js: full_default returned: ' + ret);
@@ -354,8 +401,13 @@ Module['onRuntimeInitialized'] = function() {
     console.log("loaded")
 }
 
+let count = 0
+let script = []
+
 let timeStampRe = /\[(.*?)\]/
 function addTranscript(transcript) {
+    script.push(tsToSrt(transcript, ++count))
+
     let timestamp = transcript.match(timeStampRe)[0]
     let time = parseTimeStamp(timestamp)
 
@@ -370,22 +422,30 @@ function addTranscript(transcript) {
     `
 
     transcriptNode.appendChild(content)
+    //scrollBottom(transcriptNode)
+}
+
+function tsToSrt(ts, index) {
+    let split = ts.split("   ")
+    let time = split[0]
+    let content = split[1]
+
+    time = time
+            .replace('[', '')
+            .replace(']', '')
+            .replaceAll('.', ',')
+
+    return `${index}\n${time}\n${content}`
+}
+
+function scrollBottom(transcriptNode) {
     transcriptNode.scrollTo({
         top: transcriptNode.scrollHeight,
         behavior: "smooth"
     })
 }
 
-
 // Utils
-
-document.getElementById("getTime").addEventListener('click', () => {
-    let pv = document.getElementById("preview")
-    let time = formatTime(pv.currentTime)
-    notify(`time ${formatTime(time)}`)
-    console.log(time)
-})
-
 function formatTime(time) {
     let t = parseInt(time);
     return parseInt(t / 60) + ':' + (t % 60 < 10 ? '0' + t % 60 : t % 60);
@@ -454,4 +514,18 @@ function parseTimeStamp(timestamp) {
         start,
         end
     }
+}
+
+function downloadString(text, fileType, fileName) {
+  var blob = new Blob([text], { type: fileType });
+
+  var a = document.createElement('a');
+  a.download = fileName;
+  a.href = URL.createObjectURL(blob);
+  a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
 }
