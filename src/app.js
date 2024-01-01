@@ -207,7 +207,13 @@ function cbProgress(message) {
 
 let exportBtn = document.getElementById("exportBtn")
 exportBtn.addEventListener('click', () => {
-    downloadString(script.join('\n\n'), "text/plain", fileToSrt(filename))
+    let srt = []
+    let i = 0
+    script.forEach(item => {
+        srt.push(tsToSrt(item, ++i)) 
+    })
+
+    downloadString(srt.join('\n\n'), "text/plain", fileToSrt(filename))
 })
 
 function fileToSrt(name) {
@@ -405,8 +411,8 @@ let count = 0
 let script = []
 
 let timeStampRe = /\[(.*?)\]/
-function addTranscript(transcript) {
-    script.push(tsToSrt(transcript, ++count))
+function addTranscript(transcript) { 
+    script.push(transcript)
 
     let timestamp = transcript.match(timeStampRe)[0]
     let time = parseTimeStamp(timestamp)
@@ -416,13 +422,45 @@ function addTranscript(transcript) {
     let content = document.createElement("p")
     content.innerHTML = `
     <div class="transcript">
-        <button id="timestamp">${time.start.minute}:${time.start.seconds}</button>
-        <p>${transcript.replace(timestamp, "")}</p>
+        <button id="time">${time.start.minute}:${time.start.seconds}</button>
+        <p id="${count++}" class="content">${transcript.replace(timestamp, "")}</p>
+        <button id="edit" onClick="editContent(this, event)">Edit</button>
     </div>
     `
 
     transcriptNode.appendChild(content)
     //scrollBottom(transcriptNode)
+}
+
+function editContent(node, e) {
+    let transcript = node.parentNode
+    let content = transcript.children[1]
+    
+    if (node.textContent=="Edit") {
+        let input = document.createElement("input")
+        input.id = content.id
+        input.value = content.textContent.trim()
+        transcript.replaceChild(input, content)
+
+        input.focus()
+        
+        node.textContent = "Done"
+        return
+    } 
+
+    if (node.textContent == "Done") {
+        let i = Number(content.id)
+        let split = script[i].split("   ")
+        script[i] = `${split[0]}   ${content.value.trim()}`
+
+        let input = document.createElement("p")
+        input.id = content.id
+        input.textContent = content.value
+        transcript.replaceChild(input, content)
+
+        node.textContent = "Edit"
+        return
+    }
 }
 
 function tsToSrt(ts, index) {

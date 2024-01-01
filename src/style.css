@@ -25,15 +25,27 @@
 
 /* Transcript */
 .transcript {
-    @apply flex m-4 items-start
+    @apply flex p-4 items-start relative
 }
 
-.transcript > button {
+.transcript > #time {
     @apply bg-white mt-0.5 rounded-xl px-2 text-blue-900
 }
 
-.transcript > p {
+.transcript > p, input {
     @apply ml-10 mr-4
+}
+
+.transcript:hover > #edit {
+    @apply block
+}
+
+.transcript:hover {
+    @apply bg-white rounded-md
+}
+
+.transcript > #edit {
+    @apply hidden absolute right-0 mr-3
 }
 
 /* Transcript */
