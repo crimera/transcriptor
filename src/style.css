@@ -33,7 +33,7 @@
 }
 
 .transcript > p, input {
-    @apply ml-10 mr-4
+    @apply ml-10 mr-10 w-full
 }
 
 .transcript:hover > #edit {
