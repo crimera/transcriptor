@@ -220,6 +220,8 @@ function storeFS(fname, buf) {
 
     printTextarea('storeFS: stored model: ' + fname + ' size: ' + buf.length);
 
+    toggleProcessBtn()
+
     // document.getElementById('model').innerHTML = 'Model fetched: ' + model_whisper;
 }
 
@@ -274,8 +276,7 @@ function loadAudio(event) {
     printTextarea('js: loading audio: ' + file.name + ', size: ' + file.size + ' bytes');
     printTextarea('js: please wait ...');
 
-
-    processBtn.setAttribute("disabled", true)
+    document.getElementById("processBtn").setAttribute("disabled", true)
 
     var reader = new FileReader();
     reader.onload = function(event) {
@@ -292,9 +293,7 @@ function loadAudio(event) {
                 audio = renderedBuffer.getChannelData(0);
                 printTextarea('js: audio loaded, size: ' + audio.length);
 
-                // Enable procces button
-                processBtn.removeAttribute("disabled")
-
+                toggleProcessBtn()
 
                 // truncate to first 30 seconds
                 if (audio.length > kMaxAudio_s * kSampleRate) {
@@ -364,11 +363,10 @@ function addTranscript(transcript) {
 
     let content = document.createElement("p")
     content.innerHTML = `
-    <div class="flex m-4 items-start">
-        <button id="timestamp" class="bg-white mt-0.5 rounded-xl px-2 text-blue-900">${time.start.minute}:${time.start.seconds}</button>
-        <p class="ml-10 mr-4">${transcript.replace(timestamp, "")}</p>
+    <div class="transcript">
+        <button id="timestamp">${time.start.minute}:${time.start.seconds}</button>
+        <p>${transcript.replace(timestamp, "")}</p>
     </div>
-
     `
 
     transcriptNode.appendChild(content)
@@ -376,6 +374,58 @@ function addTranscript(transcript) {
         top: transcriptNode.scrollHeight,
         behavior: "smooth"
     })
+}
+
+
+// Utils
+
+document.getElementById("getTime").addEventListener('click', () => {
+    let pv = document.getElementById("preview")
+    let time = formatTime(pv.currentTime)
+    notify(`time ${formatTime(time)}`)
+    console.log(time)
+})
+
+function formatTime(time) {
+    let t = parseInt(time);
+    return parseInt(t / 60) + ':' + (t % 60 < 10 ? '0' + t % 60 : t % 60);
+}
+
+function notify(message) {
+    let notification = document.createElement("div")
+    notification.id = "notif"
+    notification.innerHTML = `
+        <h1>${message}</h1>
+    `
+
+    let main = document.getElementById("main")
+    main.appendChild(notification)
+
+    setTimeout(function() {
+        main.removeChild(notification)
+    }, 2000);
+}
+
+function toggleProcessBtn() {
+    processBtn.setAttribute("disabled", true)
+
+    if (!instance) {
+        instance = Module.init('whisper.bin');
+
+        if (instance) {
+            printTextarea("js: whisper initialized, instance: " + instance);
+        }
+    }
+
+    if (!instance) {
+        return;
+    }
+
+    if (!audio) {
+        return;
+    }
+
+    processBtn.removeAttribute("disabled")
 }
 
 function parseTimeStamp(timestamp) {

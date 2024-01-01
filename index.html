@@ -28,7 +28,7 @@
             <div class="bg-gray-100 border rounded-md gap-2 flex flex-auto flex-col p-4 mt-2">
                 <label class="ml-1">Model</label>
                 <div class="flex flex-row gap-2">
-                    <select id="country" name="country" autocomplete="country-name" class="chooser">
+                    <select id="model" name="model" autocomplete="country-name" class="chooser">
                         <option>Tiny En (31 MB)</option>
                         <option>Tiny (31 MB)</option>
                         <option>Base (57 MB)</option>
@@ -40,7 +40,19 @@
                     <button class="btn" id="getModelBtn">Fetch</button>
                 </div>
 
-                <button class="btn" disabled id="processBtn">Generate Transcript</button>
+                <label class="ml-1">Language</label>
+                <div class="flex flex-row">
+                    <div class="h-[42.6667px] flex flex-row content-center">
+                        <input class="ml-[10px] bg-black-100 mr-1 w-5" id="translate" type="checkbox" />
+                        <label class="p-2 text-neutral-700" for="translate">Translate</label>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn" disabled id="processBtn">Generate Transcript</button>
+
+                    <button id="exportBtn" class="btn" disabled>Export</button>
+                </div>
             </div>
         </div>
 
