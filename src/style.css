@@ -20,7 +20,7 @@
 }
 
 #preview {
-    @apply w-full
+    @apply lg:w-full md:w-1/2
 }
 
 /* Transcript */
