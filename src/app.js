@@ -282,7 +282,6 @@ function loadPreview(file) {
         type = "video";
     }
 
-
     let node = document.createElement(type)
     node.id = "preview"
     node.classList.add("border")
