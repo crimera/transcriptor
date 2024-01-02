@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+#main {
+    @apply px-10 py-5 bg-gray-100
+}
+
+#links {
+    @apply flex-auto gap-2 flex justify-end content-center
+}
+
+#links > a {
+    @apply text-center p-1 border rounded-2xl px-4 shadow-sm
+}
+
+
 .btn {
     @apply rounded-lg bg-white p-2 shadow-sm border-[1.5px] border-gray-300 hover:bg-gray-50 disabled:opacity-40
 }
@@ -41,11 +54,19 @@
 }
 
 .transcript:hover {
-    @apply bg-white rounded-md
+    @apply bg-white rounded-md shadow-sm
 }
 
 .transcript > #edit {
     @apply hidden absolute right-0 mr-3
+}
+
+#transcriptContainer {
+    @apply md:h-[765px] rounded-lg shadow-sm
+}
+
+#transcript {
+    @apply h-full
 }
 
 /* Transcript */

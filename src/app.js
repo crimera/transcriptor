@@ -391,6 +391,7 @@ function onProcess(translate) {
         printTextarea('js: processing - this might take a while ...');
         printTextarea('');
 
+        transcriptNode.innerHTML = ''
         notify("Generating transcript...")
 
         setTimeout(function() {

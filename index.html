@@ -7,15 +7,35 @@
 </head>
 
 <body class="flex flex-col h-screen">
-    <nav class="w-full bg-gray-50 p-3 border-b">
-        <p class="font-bold text-xl">Transcriptor</p>
+    <nav class="flex flex-row w-full bg-gray-50 p-3 border-b relative px-11">
+        <div class="flex flex-row flex-auto gap-3">
+            <img width="30px" src="scroll.png" />
+            <p class="inline font-bold text-xl">
+                Transcriptor
+            </p>
+        </div>
+        <div id="links">
+            <a href="#" class="text-blue-600 border-blue-200 hover:bg-blue-50">
+                Facebook
+            </a>
+            <a href="#" class="text-violet-900 border-violet-200 hover:bg-violet-50">
+                Discord
+            </a>
+            <a href="#" class="text-blue-400 border-blue-200 hover:bg-blue-50">
+                Twitter
+            </a>
+        </div>
     </nav>
 
-    <div id="main" class="flex flex-wrap gap-5 h-screen w-screen p-10"> 
-        <div class="flex flex-col flex-auto content-end justify-center gap-3 md:w-full lg:w-1">
+    <div id="main" class="flex flex-wrap flex-row gap-5 w-screen p-10 h-full">
+        <div class="flex flex-col flex-auto gap-3 mb-4 md:w-full lg:w-1 relative">
 
             <!-- Preview/Upload -->
-            <div id="previewDiv" class="flex flex-col justify-center content-center h-96 p-4">
+            <div id="previewDiv" class="flex flex-col justify-center content-center h-96 p-4 relative">
+                <!-- <p class="absolute left-0 right-0 mt-10 mr-auto text-center">
+                    Video Here
+                </p> -->
+
                 <div class="my-5">
                     <label id="fileLabel" class="btn hover:cursor-pointer">
                         <input class="hidden" type="file" id="file" name="file" onchange="loadAudio(event)" />
@@ -28,7 +48,7 @@
             </div>
 
             <!-- Controls -->
-            <div class="bg-gray-100 border rounded-md gap-2 flex flex-col p-4 mt-2">
+            <div class="rounded-md gap-2 flex flex-col p-4 backdrop-blur-xl">
                 <label class="ml-1">Model</label>
                 <div class="flex flex-row gap-2">
                     <select id="model" name="model" autocomplete="country-name" class="chooser">
@@ -39,7 +59,7 @@
                     </select>
 
                     <button class="btn" id="getModelBtn">Fetch</button>
-                </div>
+                </div> 
 
                 <label class="ml-1">Language</label>
                 <div class="flex flex-row">
@@ -58,9 +78,9 @@
         </div>
 
         <!-- Transcript -->
-        <div id="transcriptContainer" class="border p-4 bg-gray-50 rounded-md pb-9 flex-auto lg:w-32 h-full">
+        <div id="transcriptContainer" class="border p-4 bg-gray-50 pb-9 flex-auto lg:w-32 h-full">
             <p>Transcript</p>
-            <div id="transcript" class="overflow-y-scroll h-full mt-2">
+            <div id="transcript" class="overflow-y-scroll h-full mt-2"> 
             </div>
         </div>
     </div>
