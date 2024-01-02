@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "start npx tailwindcss -i .\\src\\style.css -o .\\dist\\output.css --watch && vite",
-    "build": "vite build",
+    "build": "vite build &&  npx tailwindcss -i .\\src\\style.css -o .\\dist\\output.css",
     "preview": "vite preview"
   },
   "devDependencies": {
