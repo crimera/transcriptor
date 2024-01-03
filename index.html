@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+    <title>whisper.cpp : WASM example</title>
+    <link rel="stylesheet" href="/dist/output.css">
+</head>
+
+<body>
+    <div id="main">
+        <div id="video" class="card col">
+            <div style="gap: 10px;" class="col">
+                <div id="previewDiv">
+                    <video id="preview" src="" />
+                </div>
+                <div id="menu">
+                    <button id="getModelBtn">Fetch Model</button>
+                    <label id="fileLabel" class="custom-file-upload">
+                        <input type="file" id="file" name="file" onchange="loadAudio(event)" />
+                        Upload
+                    </label>
+                </div>
+            </div>
+
+            <button id="processBtn">Generate Transcript</button>
+        </div>
+
+        <div id="transcriptContainer" class="card">
+            <p>Transcript</p>
+            <div id="transcript" class="scrollable" />
+        </div>
+    </div>
+
+    <!-- <script type="text/javascript" src="helpers.js"></script> -->
+    <script type='text/javascript' src="src/app.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>
