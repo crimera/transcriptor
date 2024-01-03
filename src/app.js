@@ -241,7 +241,11 @@ function loadPreview(file) {
 
     let node = document.createElement(type)
     node.id = "preview"
+    node.classList.add("border")
+    node.classList.add("rounded")
+    node.classList.add("bg-black")
     node.src = URL.createObjectURL(file)
+    node.class = "border rounded"
     node.controls = true
     document.getElementById("preview").replaceWith(node)
 }
@@ -350,10 +354,11 @@ function addTranscript(transcript) {
 
     let content = document.createElement("p")
     content.innerHTML = `
-        <div id="timestampDiv" class="row">
-        <button id="timestamp">${time.start.minute}:${time.start.seconds}</button>
-        ${transcript.replace(timestamp, "")}
-        </div>
+    <div class="flex m-4 items-start">
+        <button id="timestamp" class="bg-white mt-0.5 rounded-xl px-2 text-blue-900">${time.start.minute}:${time.start.seconds}</button>
+        <p class="ml-10 mr-4">${transcript.replace(timestamp, "")}<p>
+    </div>
+
     `
 
     transcriptNode.appendChild(content)
@@ -384,7 +389,7 @@ function parseTimeStamp(timestamp) {
         seconds: endComplete[2].slice(0, 2),
         milis: endComplete[2].slice(-3)
     }
-    
+
     return {
         start,
         end
