@@ -11,7 +11,10 @@ document.getElementById('getModelBtn').addEventListener('click', function() {
     loadRemote(modelUrl, dst, size_mb, cbProgress, storeFS, () => { console.log("cancelled") }, cbPrint);
 })
 
-document.getElementById('processBtn').addEventListener('click', function() {
+
+let processBtn = document.getElementById('processBtn')
+
+processBtn.addEventListener('click', function() {
     onProcess(false)
 })
 
@@ -271,6 +274,9 @@ function loadAudio(event) {
     printTextarea('js: loading audio: ' + file.name + ', size: ' + file.size + ' bytes');
     printTextarea('js: please wait ...');
 
+
+    processBtn.setAttribute("disabled", true)
+
     var reader = new FileReader();
     reader.onload = function(event) {
         var buf = new Uint8Array(reader.result);
@@ -285,6 +291,10 @@ function loadAudio(event) {
             offlineContext.startRendering().then(function(renderedBuffer) {
                 audio = renderedBuffer.getChannelData(0);
                 printTextarea('js: audio loaded, size: ' + audio.length);
+
+                // Enable procces button
+                processBtn.removeAttribute("disabled")
+
 
                 // truncate to first 30 seconds
                 if (audio.length > kMaxAudio_s * kSampleRate) {
@@ -356,7 +366,7 @@ function addTranscript(transcript) {
     content.innerHTML = `
     <div class="flex m-4 items-start">
         <button id="timestamp" class="bg-white mt-0.5 rounded-xl px-2 text-blue-900">${time.start.minute}:${time.start.seconds}</button>
-        <p class="ml-10 mr-4">${transcript.replace(timestamp, "")}<p>
+        <p class="ml-10 mr-4">${transcript.replace(timestamp, "")}</p>
     </div>
 
     `
