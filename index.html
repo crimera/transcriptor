@@ -59,7 +59,7 @@
                     </select>
 
                     <button class="btn" id="getModelBtn">Fetch</button>
-                </div> 
+                </div>
 
                 <label class="ml-1">Language</label>
                 <div class="flex flex-row">
@@ -79,8 +79,11 @@
 
         <!-- Transcript -->
         <div id="transcriptContainer" class="border p-4 bg-gray-50 pb-9 flex-auto lg:w-32 h-full">
-            <p>Transcript</p>
-            <div id="transcript" class="overflow-y-scroll h-full mt-2"> 
+            <div class="flex flex-row gap-3">
+                <p>Transcript</p>
+                <div id="spinner" class="spinner hidden"></div>
+            </div>
+            <div id="transcript" class="overflow-y-scroll h-full mt-2">
             </div>
         </div>
     </div>

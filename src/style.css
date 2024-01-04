@@ -10,10 +10,23 @@
     @apply flex-auto gap-2 flex justify-end content-center
 }
 
-#links > a {
+#links>a {
     @apply text-center p-1 border rounded-2xl px-4 shadow-sm
 }
 
+.spinner {
+    @apply border-4 border-t-4 border-r-4 border-transparent border-r-gray-800 border-t-gray-800 rounded-full w-[25px] h-[25px] animate-spin
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
 
 .btn {
     @apply rounded-lg bg-white p-2 shadow-sm border-[1.5px] border-gray-300 hover:bg-gray-50 disabled:opacity-40
@@ -29,7 +42,6 @@
 
 #exportBtn {
     @apply border-blue-300 bg-blue-200 text-blue-700 hover:enabled:shadow-md disabled:opacity-30 active:enabled:bg-blue-300 hover:disabled:shadow-none
-
 }
 
 #preview {
@@ -41,15 +53,15 @@
     @apply flex p-4 items-start relative
 }
 
-.transcript > #time {
+.transcript>#time {
     @apply bg-white mt-0.5 rounded-xl px-2 text-blue-900
 }
 
-.transcript > p, input {
+.transcript>p, input {
     @apply ml-10 mr-10 w-full
 }
 
-.transcript:hover > #edit {
+.transcript:hover>#edit {
     @apply block
 }
 
@@ -57,7 +69,7 @@
     @apply bg-white rounded-md shadow-sm
 }
 
-.transcript > #edit {
+.transcript>#edit {
     @apply hidden absolute right-0 mr-3
 }
 
@@ -77,7 +89,7 @@
     @apply absolute left-0 bottom-0 m-5 w-60 p-4 rounded-md shadow-lg border-2 bg-white
 }
 
-#notif > h1 {
+#notif>h1 {
     @apply text-black font-semibold
 }
 

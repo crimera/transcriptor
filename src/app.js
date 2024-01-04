@@ -17,7 +17,9 @@ function parseModel(model) {
         .replace(" ", ".")
 }
 
-document.getElementById('getModelBtn').addEventListener('click', function() {
+let spinner = document.getElementById("spinner")
+
+document.getElementById('getModelBtn').addEventListener('click', function () {
     let modelChooser = document.getElementById("model")
     let model = modelChooser.value
 
@@ -28,7 +30,7 @@ document.getElementById('getModelBtn').addEventListener('click', function() {
 
 let processBtn = document.getElementById('processBtn')
 
-processBtn.addEventListener('click', function() {
+processBtn.addEventListener('click', function () {
     let translate = document.getElementById("translate").checked
 
     onProcess(this.translate)
@@ -97,7 +99,7 @@ function loadRemote(url, dst, size_mb, cbProgress, cbReady, cbCancel, cbPrint) {
         cbPrint('loadRemote: navigator.storage.estimate() is not supported');
     } else {
         // query the storage quota and print it
-        navigator.storage.estimate().then(function(estimate) {
+        navigator.storage.estimate().then(function (estimate) {
             cbPrint('loadRemote: storage quota: ' + estimate.quota + ' bytes');
             cbPrint('loadRemote: storage usage: ' + estimate.usage + ' bytes');
         });
@@ -106,7 +108,7 @@ function loadRemote(url, dst, size_mb, cbProgress, cbReady, cbCancel, cbPrint) {
     // check if the data is already in the IndexedDB
     var rq = indexedDB.open(dbName, dbVersion);
 
-    rq.onupgradeneeded = function(event) {
+    rq.onupgradeneeded = function (event) {
         var db = event.target.result;
         if (db.version == 1) {
             var os = db.createObjectStore('models', { autoIncrement: false });
@@ -119,13 +121,13 @@ function loadRemote(url, dst, size_mb, cbProgress, cbReady, cbCancel, cbPrint) {
         }
     };
 
-    rq.onsuccess = function(event) {
+    rq.onsuccess = function (event) {
         var db = event.target.result;
         var tx = db.transaction(['models'], 'readonly');
         var os = tx.objectStore('models');
         var rq = os.get(url);
 
-        rq.onsuccess = function(event) {
+        rq.onsuccess = function (event) {
             if (rq.result) {
                 cbPrint('loadRemote: "' + url + '" is already in the IndexedDB');
                 cbReady(dst, rq.result);
@@ -142,11 +144,11 @@ function loadRemote(url, dst, size_mb, cbProgress, cbReady, cbCancel, cbPrint) {
                     return;
                 }
 
-                fetchRemote(url, cbProgress, cbPrint).then(function(data) {
+                fetchRemote(url, cbProgress, cbPrint).then(function (data) {
                     if (data) {
                         // store the data in the IndexedDB
                         var rq = indexedDB.open(dbName, dbVersion);
-                        rq.onsuccess = function(event) {
+                        rq.onsuccess = function (event) {
                             var db = event.target.result;
                             var tx = db.transaction(['models'], 'readwrite');
                             var os = tx.objectStore('models');
@@ -160,12 +162,12 @@ function loadRemote(url, dst, size_mb, cbProgress, cbReady, cbCancel, cbPrint) {
                                 return;
                             }
 
-                            rq.onsuccess = function(event) {
+                            rq.onsuccess = function (event) {
                                 cbPrint('loadRemote: "' + url + '" stored in the IndexedDB');
                                 cbReady(dst, data);
                             };
 
-                            rq.onerror = function(event) {
+                            rq.onerror = function (event) {
                                 cbPrint('loadRemote: failed to store "' + url + '" in the IndexedDB');
                                 cbCancel();
                             };
@@ -175,23 +177,23 @@ function loadRemote(url, dst, size_mb, cbProgress, cbReady, cbCancel, cbPrint) {
             }
         };
 
-        rq.onerror = function(event) {
+        rq.onerror = function (event) {
             cbPrint('loadRemote: failed to get data from the IndexedDB');
             cbCancel();
         };
     };
 
-    rq.onerror = function(event) {
+    rq.onerror = function (event) {
         cbPrint('loadRemote: failed to open IndexedDB');
         cbCancel();
     };
 
-    rq.onblocked = function(event) {
+    rq.onblocked = function (event) {
         cbPrint('loadRemote: failed to open IndexedDB: blocked');
         cbCancel();
     };
 
-    rq.onabort = function(event) {
+    rq.onabort = function (event) {
         cbPrint('loadRemote: failed to open IndexedDB: abort');
         cbCancel();
     };
@@ -210,7 +212,7 @@ exportBtn.addEventListener('click', () => {
     let srt = []
     let i = 0
     script.forEach(item => {
-        srt.push(tsToSrt(item, ++i)) 
+        srt.push(tsToSrt(item, ++i))
     })
 
     downloadString(srt.join('\n\n'), "text/plain", fileToSrt(filename))
@@ -227,17 +229,18 @@ var Module = {
         console.log(message)
         addTranscript(message)
     },
-    printErr: (message) => { 
+    printErr: (message) => {
         if (message.includes("whisper_print_timings")) {
             notify("Done...")
+            spinner.style.display = 'none'
             exportBtn.removeAttribute("disabled")
         }
-        console.log(message) 
+        console.log(message)
     },
-    setStatus: function(text) {
+    setStatus: function (text) {
         console.log(text)
     },
-    monitorRunDependencies: function(left) {
+    monitorRunDependencies: function (left) {
         console.log(left)
     }
 };
@@ -328,17 +331,17 @@ function loadAudio(event) {
     document.getElementById("processBtn").setAttribute("disabled", true)
 
     var reader = new FileReader();
-    reader.onload = function(event) {
+    reader.onload = function (event) {
         var buf = new Uint8Array(reader.result);
 
-        context.decodeAudioData(buf.buffer, function(audioBuffer) {
+        context.decodeAudioData(buf.buffer, function (audioBuffer) {
             var offlineContext = new OfflineAudioContext(audioBuffer.numberOfChannels, audioBuffer.length, audioBuffer.sampleRate);
             var source = offlineContext.createBufferSource();
             source.buffer = audioBuffer;
             source.connect(offlineContext.destination);
             source.start(0);
 
-            offlineContext.startRendering().then(function(renderedBuffer) {
+            offlineContext.startRendering().then(function (renderedBuffer) {
                 audio = renderedBuffer.getChannelData(0);
                 printTextarea('js: audio loaded, size: ' + audio.length);
 
@@ -353,7 +356,7 @@ function loadAudio(event) {
 
                 // setAudio(audio);
             });
-        }, function(e) {
+        }, function (e) {
             printTextarea('js: error decoding audio: ' + e);
             audio = null;
             // setAudio(audio);
@@ -392,8 +395,9 @@ function onProcess(translate) {
 
         transcriptNode.innerHTML = ''
         notify("Generating transcript...")
+        spinner.style.display = 'block'
 
-        setTimeout(function() {
+        setTimeout(function () {
             var ret = Module.full_default(instance, audio, "en", nthreads, translate);
             console.log('js: full_default returned: ' + ret);
             if (ret) {
@@ -403,7 +407,7 @@ function onProcess(translate) {
     }
 }
 
-Module['onRuntimeInitialized'] = function() {
+Module['onRuntimeInitialized'] = function () {
     console.log("loaded")
 }
 
@@ -411,7 +415,7 @@ let count = 0
 let script = []
 
 let timeStampRe = /\[(.*?)\]/
-function addTranscript(transcript) { 
+function addTranscript(transcript) {
     script.push(transcript)
 
     let timestamp = transcript.match(timeStampRe)[0]
@@ -435,18 +439,18 @@ function addTranscript(transcript) {
 function editContent(node, e) {
     let transcript = node.parentNode
     let content = transcript.children[1]
-    
-    if (node.textContent=="Edit") {
+
+    if (node.textContent == "Edit") {
         let input = document.createElement("input")
         input.id = content.id
         input.value = content.textContent.trim()
         transcript.replaceChild(input, content)
 
         input.focus()
-        
+
         node.textContent = "Done"
         return
-    } 
+    }
 
     if (node.textContent == "Done") {
         let i = Number(content.id)
@@ -469,9 +473,9 @@ function tsToSrt(ts, index) {
     let content = split[1]
 
     time = time
-            .replace('[', '')
-            .replace(']', '')
-            .replaceAll('.', ',')
+        .replace('[', '')
+        .replace(']', '')
+        .replaceAll('.', ',')
 
     return `${index}\n${time}\n${content}`
 }
@@ -499,7 +503,7 @@ function notify(message) {
     let main = document.getElementById("main")
     main.appendChild(notification)
 
-    setTimeout(function() {
+    setTimeout(function () {
         main.removeChild(notification)
     }, 2000);
 }
@@ -555,15 +559,15 @@ function parseTimeStamp(timestamp) {
 }
 
 function downloadString(text, fileType, fileName) {
-  var blob = new Blob([text], { type: fileType });
+    var blob = new Blob([text], { type: fileType });
 
-  var a = document.createElement('a');
-  a.download = fileName;
-  a.href = URL.createObjectURL(blob);
-  a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
-  a.style.display = "none";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+    var a = document.createElement('a');
+    a.download = fileName;
+    a.href = URL.createObjectURL(blob);
+    a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1500);
 }
