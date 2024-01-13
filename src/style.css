@@ -15,7 +15,7 @@
 }
 
 .spinner {
-    @apply border-4 border-t-4 border-r-4 border-transparent border-r-gray-800 border-t-gray-800 rounded-full w-[25px] h-[25px] animate-spin
+    @apply border-4 border-t-4 border-r-4 border-gray-300 border-r-gray-800 border-t-gray-800 rounded-full w-[25px] h-[25px] animate-spin
 }
 
 @keyframes spin {
@@ -61,7 +61,7 @@
     @apply ml-10 mr-10 w-full
 }
 
-.transcript:hover>#edit {
+.transcript.show:hover>#edit {
     @apply block
 }
 

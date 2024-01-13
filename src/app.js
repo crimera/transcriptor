@@ -234,6 +234,11 @@ var Module = {
             notify("Done...")
             spinner.style.display = 'none'
             exportBtn.removeAttribute("disabled")
+ 
+            var list = document.getElementsByClassName("transcript");
+            for (let item of list) {
+                console.log(item.classList.add("show"));
+            }
         }
         console.log(message)
     },
