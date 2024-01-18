@@ -143,7 +143,7 @@ footer {
 
 /* Hero */
 .hero {
-    @apply flex flex-col h-screen w-[100%] pl-20 pt-40 lg:pl-40 lg:pt-40 select-none
+    @apply flex flex-col h-screen w-[100%] pl-20 pt-40 lg:pl-40 lg:pt-32 select-none
 }
 
 .hero>div>div:first-child {
@@ -159,7 +159,7 @@ footer {
 }
 
 .hero .card {
-    @apply mr-20 lg:mr-40 mt-20
+    @apply mr-20 lg:mr-40 mt-14
 }
 
 .card {
