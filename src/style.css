@@ -2,17 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+
+body {
+    @apply md:text-2xl lg:text-base
+}
+
 #main {
     @apply px-10 py-5 bg-gray-100
 }
 
+/* Header */
+nav {
+    @apply md:h-[130px] lg:h-fit
+}
+
+nav img {
+    @apply md:size-[50px] lg:size-[30px]
+}
+
+nav>div>p {
+    @apply inline font-bold lg:text-xl self-center md:text-4xl
+}
+
 #links {
-    @apply flex-auto gap-2 flex justify-end content-center
+    @apply flex-auto gap-2 flex justify-end content-center md:max-h-9 lg:flex md:hidden
 }
 
 #links>a {
     @apply text-center p-1 border rounded-2xl px-4 shadow-sm
 }
+
+/* Header */
 
 .spinner {
     @apply border-4 border-t-4 border-r-4 border-gray-300 border-r-gray-800 border-t-gray-800 rounded-full w-[25px] h-[25px] animate-spin
@@ -97,18 +117,57 @@
 
 /* Footer */
 
-#links>div>a {
-    @apply hover:pt-[1.5px]
+footer {
+    @apply bg-gray-50 border-t-[1.5px] lg:h-[15vh] w-[100%] p-3 flex flex-row justify-evenly
 }
 
-#links>div>a.fb {
+#foot-links>div:first-child {
+    @apply gap-5 flex
+}
+
+#foot-links>div:first-child>a {
+    @apply font-semibold hover:pt-[1.5px]
+}
+
+#foot-links>div>a#fb {
     @apply hover:text-blue-600
 }
 
-#links>div>a.disc {
+#foot-links>div>a#disc {
     @apply hover:text-violet-900
 }
 
-#links>div>a.x {
+#foot-links>div>a#x {
     @apply hover:text-blue-400
 }
+
+/* Hero */
+.hero {
+    @apply flex flex-col h-screen w-[100%] pl-20 pt-40 lg:pl-40 lg:pt-40 select-none
+}
+
+.hero>div>div:first-child {
+    @apply lg:max-w-[800px]
+}
+
+.hero p {
+    @apply text-2xl lg:text-4xl max-w-[80%] text-neutral-600
+}
+
+.hero h1 {
+    @apply text-4xl lg:text-6xl
+}
+
+.hero .card {
+    @apply mr-20 lg:mr-40 mt-20
+}
+
+.card {
+    @apply backdrop-blur-xl border rounded-lg p-10 bg-gray-100
+}
+
+.outlined-button {
+    @apply border rounded-full p-2 text-xl lg:text-xl px-20 bg-black text-white opacity-90 hover:opacity-100
+}
+
+/* Hero */

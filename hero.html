@@ -7,10 +7,10 @@
 </head>
 
 <body class="flex flex-col h-full">
-    <nav id="head" class="flex flex-row w-full bg-gray-50 p-3 border-b relative px-11">
+    <nav id="head" class="flex flex-row w-full bg-gray-50 p-3 border-b relative px-11 items-center">
         <div class="flex flex-row flex-auto gap-3">
             <img width="30px" src="scroll.png" />
-            <p class="inline font-bold text-xl">
+            <p>
                 Transcriptor
             </p>
         </div>
@@ -27,26 +27,43 @@
         </div>
     </nav>
 
-    <div class="h-screen w-[100%]">
+    <!-- Main -->
+    <div class="hero">
+        <div class="flex flex-wrap">
+            <div class="leading-none">
+                <h1 class="font-semibold text-[3rem]">Make video transcriptions</h1>
+                <h1 class="font-semibold text-[3rem] opacity-50">Make audio transcriptions</h1>
+                <h1 class="font-semibold text-[3rem] opacity-20">Make video mp3</h1>
+                <p class="mt-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>
+                <button class="mt-16 outlined-button">Try it out!</button>
+            </div>
+            <div>
+                <img width="60px" height="50%" src="ink.png" />
+            </div>
+        </div>
+        <div class="card flex justify-evenly">
+            <p>Miranda</p>
+            <p>Padollina</p>
+            <p>Saquing</p>
+        </div>
+    </div>
     </div>
 
-    <footer class="border-t-[1.5px] h-[15vh] w-[100%] p-3 flex flex-row justify-evenly">
+    <footer>
         <div class="flex flex-col gap-[1.2px] flex-1">
             <h1 class="font-semibold text-lg">Transcriptor</h1>
             <a href="#">Terms & policies</a>
             <a href="#">Privacy policy</a>
             <a href="#">Brand guidelines</a>
         </div>
-        <div class="flex flex-col gap-[1.2px] flex-1" id="links">
-            <div class="flex flex-col items-center flex-1">
-                <div class="flex gap-4 font-semibold justify-center">
-                    <a href="#" class="fb">Facebook</a>
-                    <a href="#" class="disc">Discord</a>
-                    <a href="#" class="x">Twitter</a>
-                </div>
-                <div class="pt-5">
-                    <a href="#head" class="hover:font-semibold">Back to Top</a>
-                </div>
+        <div class="flex flex-1 flex-col" id="foot-links">
+            <div class="flex-1 self-center">
+                <a href="#" id="fb">Facebook</a>
+                <a href="#" id="disc">Discord</a>
+                <a href="#" id="x">Twitter</a>
+            </div>
+            <div class="flex-1 self-center">
+                <a href="#" class="hover:font-semibold">Back to top</a>
             </div>
         </div>
         <div class="flex flex-col gap-[1.2px] flex-1 items-end justify-center">
