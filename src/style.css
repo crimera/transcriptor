@@ -29,7 +29,7 @@
 }
 
 .btn {
-    @apply rounded-lg bg-white p-2 shadow-sm border-[1.5px] border-gray-300 hover:bg-gray-50 disabled:opacity-40
+    @apply rounded-lg bg-white p-2 shadow-sm border-[1.5px] border-gray-300 hover:bg-gray-50 disabled:opacity-40 hover:shadow-lg
 }
 
 .chooser {
@@ -94,3 +94,21 @@
 }
 
 /* Notif */
+
+/* Footer */
+
+#links>div>a {
+    @apply hover:pt-[1.5px]
+}
+
+#links>div>a.fb {
+    @apply hover:text-blue-600
+}
+
+#links>div>a.disc {
+    @apply hover:text-violet-900
+}
+
+#links>div>a.x {
+    @apply hover:text-blue-400
+}

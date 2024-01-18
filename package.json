@@ -11,5 +11,9 @@
   "devDependencies": {
     "tailwindcss": "^3.4.0",
     "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "@ffmpeg/ffmpeg": "^0.12.10",
+    "@ffmpeg/util": "^0.12.1"
   }
 }
