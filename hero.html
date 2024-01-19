@@ -10,9 +10,9 @@
     <nav id="head" class="flex flex-row w-full bg-gray-50 p-3 border-b relative px-11 items-center">
         <div class="flex flex-row flex-auto gap-3">
             <img width="30px" src="scroll.png" />
-            <p>
+            <a class="inline font-bold text-xl" href="hero.html">
                 Transcriptor
-            </p>
+            </a>
         </div>
         <div id="links">
             <a href="#" class="text-blue-600 border-blue-200 hover:bg-blue-50">
@@ -30,21 +30,24 @@
     <!-- Main -->
     <div class="hero">
         <div class="flex flex-wrap">
-            <div class="leading-none">
+            <div class="leading-none hero-main">
                 <h1 class="font-semibold text-[3rem]">Make video transcriptions</h1>
                 <h1 class="font-semibold text-[3rem] opacity-50">Make audio transcriptions</h1>
-                <h1 class="font-semibold text-[3rem] opacity-20">Make video mp3</h1>
-                <p class="mt-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </p>
-                <button class="mt-16 outlined-button">Try it out!</button>
+                <h1 class="font-semibold text-[3rem] opacity-20">Change media formats</h1>
+                <p class="my-10">Decoding ideas, amplifying voices &#45; where speech meets precision in every
+                    transcript.</p>
+                <a href="index.html" class="mx-2 outlined-button">Try it out!</a>
             </div>
             <div>
-                <img width="60px" height="50%" src="ink.png" />
+                <!-- <img width="60px" height="50%" src="ink.png" /> -->
             </div>
         </div>
-        <div class="card flex justify-evenly">
-            <p>Miranda</p>
-            <p>Padollina</p>
-            <p>Saquing</p>
+        <div class="card flex flex-col gap-3">
+            <div id="authors" class="flex justify-evenly">
+                <p>Miranda</p>
+                <p>Padollina</p>
+                <p>Saquing</p>
+            </div>
         </div>
     </div>
     </div>
@@ -77,3 +80,5 @@
     <!-- <script type="text/javascript" src="helpers.js"></script> -->
     <script type="text/javascript" src="src/hero.js"></script>
 </body>
+
+</html>

@@ -146,7 +146,7 @@ footer {
     @apply flex flex-col h-screen w-[100%] pl-20 pt-40 lg:pl-40 lg:pt-32 select-none
 }
 
-.hero>div>div:first-child {
+.hero-main {
     @apply lg:max-w-[800px]
 }
 
@@ -163,11 +163,18 @@ footer {
 }
 
 .card {
-    @apply backdrop-blur-xl border rounded-lg p-10 bg-gray-100
+    @apply backdrop-blur-xl border rounded-full p-10 py-5 bg-gray-50
 }
 
 .outlined-button {
-    @apply border rounded-full p-2 text-xl lg:text-xl px-20 bg-black text-white opacity-90 hover:opacity-100
+    @apply border rounded-full p-2 text-xl lg:text-xl px-20 bg-black text-white opacity-80 hover:opacity-100
+}
+
+#authors {
+}
+
+#authors > p {
+    @apply text-base
 }
 
 /* Hero */

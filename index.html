@@ -6,15 +6,14 @@
     <link rel="stylesheet" href=".\public\output.css">
 </head>
 
-<body class="flex flex-col h-screen">
-    <nav class="flex flex-row w-full bg-gray-50 p-3 border-b relative px-11">
+<body class="flex flex-col h-full">
+    <nav class="flex flex-row w-full bg-gray-50 p-3 border-b relative px-11 items-center">
         <div class="flex flex-row flex-auto gap-3">
             <img width="30px" src="scroll.png" />
-            <p class="inline font-bold text-xl">
+            <a class="inline font-bold text-xl" href="hero.html">
                 Transcriptor
-            </p>
+            </a>
         </div>
-        <a id="btn-hero" href="hero.html">Home</a>
         <div id="links">
             <a href="#" class="text-blue-600 border-blue-200 hover:bg-blue-50">
                 Facebook
@@ -83,6 +82,30 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        <div class="flex flex-col gap-[1.2px] flex-1">
+            <h1 class="font-semibold text-lg">Transcriptor</h1>
+            <a href="#">Terms & policies</a>
+            <a href="#">Privacy policy</a>
+            <a href="#">Brand guidelines</a>
+        </div>
+        <div class="flex flex-1 flex-col" id="foot-links">
+            <div class="flex-1 self-center">
+                <a href="#" id="fb">Facebook</a>
+                <a href="#" id="disc">Discord</a>
+                <a href="#" id="x">Twitter</a>
+            </div>
+            <div class="flex-1 self-center">
+                <a href="#" class="hover:font-semibold">Back to top</a>
+            </div>
+        </div>
+        <div class="flex flex-col gap-[1.2px] flex-1 items-end justify-center">
+            <div class="pr-8">
+                <img width="60px" height="60px" src="scroll.png" />
+            </div>
+        </div>
+    </footer>
 
     <!-- <script type="text/javascript" src="helpers.js"></script> -->
     <script type='text/javascript' src="src/app.js"></script>
