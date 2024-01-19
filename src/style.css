@@ -167,13 +167,12 @@ footer {
 }
 
 .outlined-button {
-    @apply border rounded-full p-2 text-xl lg:text-xl px-20 bg-black text-white opacity-80 hover:opacity-100
+    @apply border rounded-full p-2 text-xl lg:text-xl px-20 bg-black text-white opacity-90 hover:opacity-100
 }
 
-#authors {
-}
+#authors {}
 
-#authors > p {
+#authors>p {
     @apply text-base
 }
 
