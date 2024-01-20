@@ -8,7 +8,7 @@ body {
 }
 
 #main {
-    @apply px-10 py-5 bg-gray-100
+    @apply px-10 py-5 bg-gray-100 h-screen
 }
 
 /* Header */
@@ -21,7 +21,11 @@ nav img {
 }
 
 nav>div>p {
-    @apply inline font-bold lg:text-xl self-center md:text-4xl
+    @apply inline font-bold lg:text-xl md:text-4xl
+}
+
+nav>div>a {
+    @apply self-center
 }
 
 #links {
@@ -143,7 +147,11 @@ footer {
 
 /* Hero */
 .hero {
-    @apply flex flex-col h-screen w-[100%] pl-20 pt-40 lg:pl-40 lg:pt-32 select-none
+    @apply flex flex-col h-screen w-[100%] px-20 pt-20 lg:px-28 lg:pt-28 select-none
+}
+
+.hero img {
+    @apply hidden lg:block
 }
 
 .hero-main {
@@ -159,11 +167,11 @@ footer {
 }
 
 .hero .card {
-    @apply mr-20 lg:mr-40 mt-14
+    @apply mt-14
 }
 
 .card {
-    @apply backdrop-blur-xl border rounded-full p-10 py-5 bg-gray-50
+    @apply backdrop-blur-xl border rounded-lg p-10 py-5 bg-gray-50
 }
 
 .outlined-button {
@@ -176,4 +184,40 @@ footer {
     @apply text-base
 }
 
+#history {
+    @apply lg:max-h-[300px] overflow-y-auto p-4 mb-10
+}
+
+#history p {
+    @apply text-base
+}
+
+#history .commit {
+    @apply border-b pb-2
+}
+
+.commit.message {
+    @apply text-black
+}
+
+#history .commit>div {
+    @apply flex justify-between
+}
+
+#history .commit:last-child {
+    @apply border-0 pb-0
+}
+
 /* Hero */
+
+/* Format */
+
+.format.hero {
+    @apply p-40 text-black
+}
+
+.format.hero div>p {
+    @apply text-xl
+}
+
+/* Format */

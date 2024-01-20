@@ -28,22 +28,17 @@
     </nav>
 
     <!-- Main -->
-    <div class="hero">
-        <div class="flex flex-wrap">
-            <div class="leading-none hero-main">
-                <h1 class="font-semibold text-[3rem]">Make video transcriptions</h1>
-                <h1 class="font-semibold text-[3rem] opacity-50">Make audio transcriptions</h1>
-                <h1 class="font-semibold text-[3rem] opacity-20">Change media formats</h1>
-                <p class="mt-10 mb-20">Decoding ideas, amplifying voices &#45; where speech meets precision in every
-                    transcript.</p>
-                <a href="index.html" class="mx-2 outlined-button">Try it out!</a>
-            </div>
-            <div class="flex-1 m-auto">
-                <img class="m-auto size-60 mb-12" src="ink.png" />
-            </div>
+    <div class="hero format">
+        <div class="flex border-b mb-4">
+            <p>&#128279;</p>
+            <p id="file-value">Test</p>
         </div>
-
-        <div id="history" class="card flex flex-col gap-2"></div>
+        <div>
+            <label id="fileLabel" class="btn hover:cursor-pointer">
+                <input class="hidden" type="file" id="format-file" name="file" onchange="loadAudio(event)" />
+                Upload
+            </label>
+        </div>
     </div>
 
     <footer>
@@ -72,7 +67,7 @@
 
 
     <!-- <script type="text/javascript" src="helpers.js"></script> -->
-    <script type="text/javascript" src="src/hero.js"></script>
+    <script type="text/javascript" src="src/format.js"></script>
 </body>
 
 </html>
