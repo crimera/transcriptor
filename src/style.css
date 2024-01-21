@@ -265,7 +265,7 @@ footer {
 /* About */
 
 .about {
-    @apply h-screen flex pt-5 pb-20 px-52 gap-20
+    @apply h-screen flex pt-20 py-52 px-52 gap-20
 }
 
 .about .card {
