@@ -2,8 +2,10 @@
 <html lang="en-us">
 
 <head>
+    <base href=".">
     <title>Transcript</title>
     <link rel="stylesheet" href=".\public\output.css">
+    <meta X-Content-Type-Options=nosniff>
 </head>
 
 <body class="flex flex-col h-full">
@@ -29,16 +31,47 @@
 
     <!-- Main -->
     <div class="hero format">
-        <div class="flex border-b mb-4">
-            <p>&#128279;</p>
-            <p id="file-value">Test</p>
+        <div class="flex border rounded-md mb-4 p-3 gap-3">
+            <div class="flex flex-1">
+                <p>&#128279;</p>
+                <p id="file-value"></p>
+            </div>
+            <div class="mt-[1px]">
+                <label id="fileLabel" class="btn hover:cursor-pointer">
+                    <input class="hidden" type="file" id="format-file" name="file" />
+                    Upload
+                </label>
+            </div>
         </div>
-        <div>
-            <label id="fileLabel" class="btn hover:cursor-pointer">
-                <input class="hidden" type="file" id="format-file" name="file" onchange="loadAudio(event)" />
-                Upload
-            </label>
+        <div class="card options flex-col flex gap-5">
+            <div class="option">
+                <h2>output:</h2>
+                <select id="format-output">
+                    <option>mp4</option>
+                    <option>webm</option>
+                    <option>mkv</option>
+                </select>
+            </div>
+
+            <div class="option">
+                <h2>codec:</h2>
+                <select id="format-codec">
+                    <option>auto</option>
+                    <option>h.264</option>
+                    <option>h.265</option>
+                    <option>copy</option>
+                </select>
+            </div>
+
+            <div class="text-right">
+                <button id="format-convert" class="btn" type="submit">Convert</button>
+            </div>
         </div>
+        <div class="self-center mt-2">
+            <video width="400px" id="format-video"></video>
+        </div>
+    </div>
+
     </div>
 
     <footer>
@@ -65,9 +98,7 @@
         </div>
     </footer>
 
-
-    <!-- <script type="text/javascript" src="helpers.js"></script> -->
-    <script type="text/javascript" src="src/format.js"></script>
+    <script type="module" src="src/format.js"></script>
 </body>
 
 </html>

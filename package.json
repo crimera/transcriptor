@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "start npx tailwindcss -i .\\src\\style.css -o .\\public\\output.css --watch && vite",
+    "dev": "vite",
     "build": "vite build &&  npx tailwindcss -i .\\src\\style.css -o .\\dist\\output.css",
     "preview": "vite preview"
   },
@@ -13,7 +13,7 @@
     "vite": "^5.0.0"
   },
   "dependencies": {
-    "@ffmpeg/ffmpeg": "^0.12.10",
-    "@ffmpeg/util": "^0.12.1"
+    "@ffmpeg/core": "^0.11.0",
+    "@ffmpeg/ffmpeg": "^0.11.3"
   }
 }

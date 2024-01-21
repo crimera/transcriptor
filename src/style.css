@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Scrollbar */
 
-body {
-    @apply md:text-2xl lg:text-base
+::-webkit-scrollbar {
+    @apply w-1
 }
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-50
+}
+
+/* Scrollbar */
 
 #main {
     @apply px-10 py-5 bg-gray-100 h-screen
@@ -170,6 +177,11 @@ footer {
     @apply mt-14
 }
 
+
+.hero .card.options {
+    @apply mt-0
+}
+
 .card {
     @apply backdrop-blur-xl border rounded-lg p-10 py-5 bg-gray-50
 }
@@ -213,11 +225,27 @@ footer {
 /* Format */
 
 .format.hero {
-    @apply p-40 text-black
+    @apply p-10 lg:p-40 text-black
 }
 
 .format.hero div>p {
     @apply text-xl
+}
+
+.options {
+    @apply gap-5
+}
+
+.option {
+    @apply flex items-center gap-5
+}
+
+.option>h2 {
+    @apply text-lg text-gray-700 w-20
+}
+
+.option>select {
+    @apply border bg-white rounded-lg py-2 px-3 flex-[5]
 }
 
 /* Format */

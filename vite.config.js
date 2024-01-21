@@ -5,14 +5,19 @@ export default defineConfig({
         headers: {
             "Cross-Origin-Opener-Policy": "same-origin",
             "Cross-Origin-Embedder-Policy": "require-corp",
-        }
+        },
+        open: true,
+        strictPort: false,
+        https: false,
+        cors: true,
     },
     build: {
         rollupOptions: {
             input: {
-                index: 'index.html',
-                hero: 'hero.html'
+                index: 'hero.html',
+                app: 'index.html',
+                format: 'format.html'
             }
         }
-    }
+    },
 })
