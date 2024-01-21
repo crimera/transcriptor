@@ -13,7 +13,7 @@
         <div class="flex flex-row flex-auto gap-3">
             <img width="30px" src="scroll.png" />
             <a class="inline font-bold text-xl" href="hero.html">
-                Transcriptor
+                Converter
             </a>
         </div>
         <div id="links">
@@ -43,10 +43,11 @@
                 </label>
             </div>
         </div>
-        <div class="card options flex-col flex gap-5">
+        <div class="card options flex-col flex gap-5 mb-3">
+            <p>Video Options</p>
             <div class="option">
                 <h2>output:</h2>
-                <select id="format-output">
+                <select id="format-voutput">
                     <option>mp4</option>
                     <option>webm</option>
                     <option>mkv</option>
@@ -55,20 +56,40 @@
 
             <div class="option">
                 <h2>codec:</h2>
-                <select id="format-codec">
-                    <option>auto</option>
-                    <option>h.264</option>
-                    <option>h.265</option>
+                <select id="format-vcodec">
                     <option>copy</option>
+                    <option value="libx264">h264</option>
+                    <option value="libx265">h265</option>
                 </select>
             </div>
 
+            <p>Audio Options</p>
+
+            <div class="option">
+                <h2>output:</h2>
+                <select id="format-aoutput">
+                    <option>mp3</option>
+                    <option>m4a</option>
+                    <option>wav</option>
+                </select>
+            </div>
+
+            <div class="option items-center">
+                <h2>remove audio:</h2>
+                <div class="size-5">
+                    <input type="checkbox" class="m-0 size-[100%]"></input>
+                </div>
+            </div>
+
             <div class="text-right">
-                <button id="format-convert" class="btn" type="submit">Convert</button>
+                <button id="format-convert" class="btn convertBtn" type="submit">Convert</button>
             </div>
         </div>
-        <div class="self-center mt-2">
-            <video width="400px" id="format-video"></video>
+        <div class="progress">
+            <div id="convert-progress"></div>
+        </div>
+        <div class="mt-3 border self-center">
+            <video id="format-video" controls class="pt-10 self-center" width="500px"></video>
         </div>
     </div>
 

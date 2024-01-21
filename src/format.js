@@ -13,20 +13,40 @@ let video = document.getElementById("format-video")
 let convertBtn = document.getElementById("format-convert")
 
 /** @type {HTMLSelectElement} **/
-let outputNode = document.getElementById("format-output")
+let outputNode = document.getElementById("format-voutput")
 
 /** @type {HTMLSelectElement} **/
-let codecNode = document.getElementById("format-codec")
+let vCodecNode = document.getElementById("format-vcodec")
+
+/** @type {HTMLSelectElement} **/
+let formatNode = document.getElementById("format-aoutput")
+
+/** @type {HTMLDivElement} **/
+let logs = document.getElementById("logs")
+
+
+/** @type {HTMLDivElement} **/
+let progressNode = document.getElementById("convert-progress")
+
+progressNode.style.width = 0
 
 input.addEventListener("change", loadFile)
 convertBtn.addEventListener("click", () => transcode(file))
 
 /** @type {File} **/
 let file = null
+let progress = 0;
 
 const ffmpeg = createFFmpeg({
-    logger: ({ message }) => console.log(message),
-    log: true,
+    logger: ({ message }) => {
+        let p = document.createElement("p")
+        p.innerHTML = message
+        logs.appendChild(p)
+    },
+    progress: ({ ratio }) => {
+        progressNode.style.width = ratio * 100 + "%"
+        console.log(ratio)
+    }
 });
 
 /** @param {Event} event **/
@@ -38,15 +58,17 @@ function loadFile({ target: { files } }) {
 
 async function transcode(file) {
     let format = outputNode.value
-    let codec = codecNode.value
+    let codec = vCodecNode.value
 
     if (ffmpeg.isLoaded() === false) await ffmpeg.load()
 
-    await ffmpeg.FS('writeFile', file.name, await fetchFile(file))
+    ffmpeg.FS('writeFile', file.name, await fetchFile(file))
 
     await ffmpeg.run('-i', file.name, '-vcodec', codec, '-acodec', 'copy', `output.${format}`)
     const data = ffmpeg.FS('readFile', `output.${format}`);
+
     console.log("read")
+
     video.controls = "controls"
     video.src = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
 }

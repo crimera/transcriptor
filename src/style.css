@@ -225,7 +225,7 @@ footer {
 /* Format */
 
 .format.hero {
-    @apply p-10 lg:p-40 text-black
+    @apply p-10 px-30 text-black
 }
 
 .format.hero div>p {
@@ -237,15 +237,27 @@ footer {
 }
 
 .option {
-    @apply flex items-center gap-5
+    @apply flex gap-5
 }
 
 .option>h2 {
-    @apply text-lg text-gray-700 w-20
+    @apply text-lg text-gray-700 w-32
 }
 
 .option>select {
     @apply border bg-white rounded-lg py-2 px-3 flex-[5]
+}
+
+.convertBtn {
+    @apply border-purple-300 bg-purple-200 text-purple-700 hover:enabled:shadow-md disabled:opacity-30 active:enabled:bg-purple-300 hover:disabled:shadow-none hover:bg-purple-200
+}
+
+.progress {
+    @apply bg-white h-4 border rounded-md
+}
+
+.progress #convert-progress {
+    @apply bg-gray-200 h-4 rounded-md
 }
 
 /* Format */
