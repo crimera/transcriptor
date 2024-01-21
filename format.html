@@ -59,9 +59,11 @@
                 <select id="format-vcodec">
                     <option>copy</option>
                     <option value="libx264">h264</option>
-                    <option value="libx265">h265</option>
+                    <option value="copy">h265</option>
                 </select>
             </div>
+
+            <div class="border my-2"></div>
 
             <p>Audio Options</p>
 
@@ -88,8 +90,8 @@
         <div class="progress">
             <div id="convert-progress"></div>
         </div>
-        <div class="mt-3 border self-center">
-            <video id="format-video" controls class="pt-10 self-center" width="500px"></video>
+        <div class="mt-3 border self-center relative">
+            <video id="format-video" class="pt-10 self-center" width="500px"></video>
         </div>
     </div>
 
@@ -98,9 +100,9 @@
     <footer>
         <div class="flex flex-col gap-[1.2px] flex-1">
             <h1 class="font-semibold text-lg">Transcriptor</h1>
+            <a href="about.html">About</a>
             <a href="#">Terms & policies</a>
             <a href="#">Privacy policy</a>
-            <a href="#">Brand guidelines</a>
         </div>
         <div class="flex flex-1 flex-col" id="foot-links">
             <div class="flex-1 self-center">

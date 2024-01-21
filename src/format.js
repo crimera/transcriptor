@@ -38,11 +38,7 @@ let file = null
 let progress = 0;
 
 const ffmpeg = createFFmpeg({
-    logger: ({ message }) => {
-        let p = document.createElement("p")
-        p.innerHTML = message
-        logs.appendChild(p)
-    },
+    log: true,
     progress: ({ ratio }) => {
         progressNode.style.width = ratio * 100 + "%"
         console.log(ratio)

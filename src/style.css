@@ -179,7 +179,7 @@ footer {
 
 
 .hero .card.options {
-    @apply mt-0
+    @apply mt-0;
 }
 
 .card {
@@ -261,3 +261,35 @@ footer {
 }
 
 /* Format */
+
+/* About */
+
+.about {
+    @apply h-screen flex pt-5 pb-20 px-52 gap-20
+}
+
+.about .card {
+    @apply flex-1 flex flex-col gap-20
+}
+
+.about .card.trans {
+    @apply hover:border-yellow-400
+}
+
+.about .card.conv {
+    @apply hover:border-blue-400
+}
+
+.about .card .head {
+    @apply self-center text-4xl text-black font-bold
+}
+
+.about .card.trans:hover .head {
+    @apply text-yellow-600
+}
+
+.about .card.conv:hover .head {
+    @apply text-blue-400
+}
+
+/* About */
