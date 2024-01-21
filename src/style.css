@@ -225,7 +225,7 @@ footer {
 /* Format */
 
 .format.hero {
-    @apply p-10 px-30 text-black
+    @apply p-10 px-28 text-black
 }
 
 .format.hero div>p {
